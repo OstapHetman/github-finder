@@ -3,6 +3,7 @@ class UI {
         this.profile = document.getElementById('profile');
     }
 
+    // Display profile in UI
     showProfile(user) {
         this.profile.innerHTML = `
             <div class="card card-body mb-3">
@@ -16,7 +17,7 @@ class UI {
                         <span class="badge badge-secondary mb-3">Public Gists: ${user.public_gists}</span>
                         <span class="badge badge-success mb-3">Followers: ${user.followers}</span>
                         <span class="badge badge-info mb-3">Following: ${user.following}</span>
-                        <br>
+                        <br><br>
                         <ul class="list-group">
                             <li class="list-group-item">Company: ${user.company}</li>
                             <li class="list-group-item">Website/Blog: ${user.blog}</li>
@@ -29,5 +30,41 @@ class UI {
             <h3 class="page-heading mb-3">Latest Repos</h3>
             <div id="repos"></div>
         `;
+    }
+
+    // Show alert msg
+    showAlert(msg, className) {
+        // Clear any remaininf alerts
+        this.clearAlert();
+        // Create div
+        const div = document.createElement('div');
+        // Add class
+        div.className = className;
+        // Add text
+        div.appendChild(document.createTextNode(msg));
+        // Get parent
+        const container = document.querySelector('.searchContainer');
+        // Get search box
+        const search = document.querySelector('.search');
+        // Insert alert
+        container.insertBefore(div, search);
+
+        // Timeout after 2s
+        setTimeout(() => {
+            this.clearAlert();
+        }, 2000);
+    }
+
+    // Clear alert msg
+    clearAlert() {
+        const currentAlert = document.querySelector('.alert');
+        if (currentAlert) {
+            currentAlert.remove();
+        }
+    }
+
+    // Clear profile
+    clearProfile() {
+        this.profile.innerHTML = '';
     }
 }
